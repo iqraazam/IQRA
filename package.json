@@ -16,7 +16,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
-    "react-typed": "^2.0.12"
+    "react-typed": "^2.0.12",
+    "three": "^0.179.1",
+    "vanta": "^0.5.24"
   },
   "devDependencies": {
     "@types/node": "24.1.0",

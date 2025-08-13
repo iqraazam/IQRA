@@ -92,13 +92,12 @@ export default function HomeSection() {
             🚀 View Projects
           </Link>
           <a
-            href="/Iqra-Azam-Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-2 rounded-xl border border-purple-500 text-white bg-black/30 hover:bg-purple-900/60 transition backdrop-blur"
-          >
-            📄 Download Resume
-          </a>
+  href="/assets/IQRA.pdf"
+  download="Iqra_Resume.pdf"
+  className="px-6 py-2 rounded-xl border border-purple-500 text-white bg-black/30 hover:bg-purple-900/60 transition backdrop-blur"
+>
+  📄 Download Resume
+</a>
         </div>
       </motion.div>
 

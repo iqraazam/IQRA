@@ -1,28 +1,92 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
 
 export default function Header() {
+  const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
+  const [bulletStyle, setBulletStyle] = useState({ left: 0 })
+
+  const linkRefs = {
+    '/': useRef<HTMLAnchorElement>(null),
+    '/about': useRef<HTMLAnchorElement>(null),
+    '/projects': useRef<HTMLAnchorElement>(null),
+    '/contact': useRef<HTMLAnchorElement>(null),
+  }
+
+  useEffect(() => {
+    const activeRef = linkRefs[pathname as keyof typeof linkRefs]?.current
+    if (activeRef) {
+      const rect = activeRef.getBoundingClientRect()
+      const parentRect = activeRef.parentElement!.getBoundingClientRect()
+      setBulletStyle({
+        // Custom offset (-30) based on your visual alignment
+        left: rect.left - parentRect.left + rect.width / 2 - 30,
+      })
+    }
+  }, [pathname])
 
   return (
     <header className="fixed top-0 w-full bg-purple-900/30 backdrop-blur-lg border-b border-purple-500/20 text-white z-50 px-6 py-4 shadow-md">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <Link href="/" className="text-xl font-bold">IqraDev</Link>
+      <div className="max-w-7xl mx-auto flex justify-between items-center relative">
+        {/* Brand Name */}
+        <Link href="/" className="text-xl font-bold whitespace-nowrap">IqraDev</Link>
 
-        <nav className="hidden md:flex space-x-8">
-          <Link href="/">Home</Link>
-          <Link href="/about">About</Link>
-          <Link href="/projects">Projects</Link>
-          <Link href="/contact">Contact</Link>
+        {/* Desktop Navigation */}
+        <nav className="relative hidden md:flex space-x-8 items-center">
+          <Link
+            ref={linkRefs['/']}
+            href="/"
+            className={`relative transition-colors ${
+              pathname === '/' ? 'text-pink-500 font-semibold' : ''
+            }`}
+          >
+            Home
+          </Link>
+          <Link
+            ref={linkRefs['/about']}
+            href="/about"
+            className={`relative transition-colors ${
+              pathname === '/about' ? 'text-pink-500 font-semibold' : ''
+            }`}
+          >
+            About
+          </Link>
+          <Link
+            ref={linkRefs['/projects']}
+            href="/projects"
+            className={`relative transition-colors ${
+              pathname === '/projects' ? 'text-pink-500 font-semibold' : ''
+            }`}
+          >
+            Projects
+          </Link>
+          <Link
+            ref={linkRefs['/contact']}
+            href="/contact"
+            className={`relative transition-colors ${
+              pathname === '/contact' ? 'text-pink-500 font-semibold' : ''
+            }`}
+          >
+            Contact
+          </Link>
+
+          {/* Dot under active item */}
+          <div
+            className="absolute -bottom-2 h-2 w-2 bg-pink-500 rounded-full transition-all duration-300"
+            style={{ left: bulletStyle.left }}
+          />
         </nav>
 
+        {/* Mobile menu toggle */}
         <button onClick={() => setIsOpen(!isOpen)} className="md:hidden">
           ☰
         </button>
       </div>
 
+      {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden mt-2 space-y-2">
           <Link href="/" className="block">Home</Link>
