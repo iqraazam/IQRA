@@ -1,104 +1,112 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa'
-import Link from 'next/link'
 
-const reviews = [
+const highlights = [
   {
-    name: 'Sarah Malik',
-    role: 'Startup Founder',
-    review:
-      'Iqra delivered beyond expectations. The AI module she built helped us reduce manual work by 60%. Highly recommended!',
+    icon: '💡',
+    title: 'AI/ML Model Design',
+    description: 'Expert in TensorFlow, PyTorch, Scikit-learn, and Keras for building intelligent systems.'
   },
   {
-    name: 'Adeel Asif',
-    role: 'CTO, MedTech',
-    review:
-      'Her deep learning model and integration were top-notch. We worked in sprints and every milestone was perfectly executed.',
+    icon: '💻',
+    title: 'Full Stack Development',
+    description: 'Proficient in Flutter, React, Next.js, Node.js, and modern web/mobile frameworks.'
   },
   {
-    name: 'Emily Chen',
-    role: 'Design Lead',
-    review:
-      'Working with Iqra was a delight. She blends beautiful UI with powerful backend logic and AI. Would hire again!',
+    icon: '☁️',
+    title: 'Cloud & Automation',
+    description: 'Experience with Firebase, AWS, and cloud-based deployment solutions.'
   },
+  {
+    icon: '🔧',
+    title: 'Research & Optimization',
+    description: 'Specialized in model optimization using EfficientNet, Transformers, and advanced architectures.'
+  }
 ]
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-28 px-6 bg-gradient-to-br from-black via-purple-950 to-black text-white">
+    <section id="about" className="relative py-28 px-6 bg-gradient-to-br from-black via-purple-950 to-black text-white min-h-screen flex items-center overflow-hidden">
+      {/* Floating 3D orbs */}
+      <motion.div 
+        className="absolute top-20 left-10 w-64 h-64 rounded-full bg-purple-600/20 blur-3xl"
+        animate={{ 
+          y: [0, 50, 0],
+          x: [0, 30, 0],
+          scale: [1, 1.1, 1]
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div 
+        className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-pink-600/20 blur-3xl"
+        animate={{ 
+          y: [0, -40, 0],
+          x: [0, -30, 0],
+          scale: [1.1, 1, 1.1]
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      />
+      
       <motion.div
-        className="max-w-5xl mx-auto"
+        className="max-w-6xl mx-auto w-full relative z-10"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
-        <h2 className="text-4xl font-bold text-purple-300 mb-8 text-center">About Me</h2>
+        <h2 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-12 text-center">
+          About Me
+        </h2>
 
-        <p className="text-purple-100 text-lg leading-relaxed mb-6">
-          I'm <span className="text-purple-400 font-semibold">Iqra Azam</span>, a passionate Full Stack Developer and
-          AI/ML Engineer based in Lahore, Pakistan. With over 3 years of experience building scalable web and mobile
-          applications, I specialize in combining elegant design with intelligent functionality. From working on complex
-          neural network models to crafting pixel-perfect UIs, I thrive at the intersection of AI and modern software
-          development.
-        </p>
+        <div className="glass-card p-10 rounded-2xl mb-12">
+          <p className="text-purple-100 text-lg leading-relaxed mb-6">
+            I'm <span className="text-purple-300 font-semibold">Iqra Azam</span>, a passionate AI Engineer and Full-Stack Developer 
+            with expertise in building intelligent, scalable digital solutions. I specialize in combining cutting-edge machine learning 
+            with modern web and mobile development to create impactful applications.
+          </p>
 
-        <p className="text-purple-100 text-lg leading-relaxed mb-6">
-          My technical arsenal includes <strong>React, Next.js, Flutter, Node.js, TensorFlow, PyTorch</strong> and more.
-          Whether it's a startup MVP or a large-scale application, I ensure clean architecture, optimized performance, and
-          exceptional user experience.
-        </p>
+          <blockquote className="border-l-4 border-pink-500 pl-6 py-4 my-8 italic text-xl text-purple-200">
+            "Passionate about building tech that bridges creativity and intelligence."
+          </blockquote>
 
-        <p className="text-purple-100 text-lg leading-relaxed mb-6">
-          I'm available for freelance, remote, hybrid, or full-time roles. My current freelance rate is
-          <span className="text-pink-400 font-semibold"> $25/hr</span> and I typically work
-          <span className="text-purple-300 font-semibold"> 20–30 hrs/week</span>.
-        </p>
+          <p className="text-purple-100 text-lg leading-relaxed">
+            From designing neural networks to crafting pixel-perfect user interfaces, I thrive at the intersection of AI and software engineering. 
+            My work spans AI/ML model development, full-stack web applications, mobile apps, and cloud solutions.
+          </p>
+        </div>
 
-        <h3 className="text-2xl font-semibold text-purple-200 mt-12 mb-4">🌟 Client Reviews</h3>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {reviews.map((rev, idx) => (
+        <h3 className="text-3xl font-semibold text-purple-300 mb-8 text-center">
+          🌟 Core Expertise
+        </h3>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          {highlights.map((item, idx) => (
             <motion.div
               key={idx}
-              whileHover={{ scale: 1.03 }}
-              className="bg-purple-800/20 border border-purple-500/20 rounded-xl p-5 backdrop-blur-lg"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1, duration: 0.5 }}
+              whileHover={{ 
+                scale: 1.05, 
+                y: -10,
+                rotateY: 5,
+                rotateX: 5
+              }}
+              className="glass-card-3d p-6 text-center cursor-pointer"
+              style={{ transformStyle: 'preserve-3d' }}
             >
-              <p className="text-purple-100 text-sm mb-4">“{rev.review}”</p>
-              <div className="text-sm font-medium text-purple-300">{rev.name}</div>
-              <div className="text-xs text-purple-400">{rev.role}</div>
+              <motion.div 
+                className="text-5xl mb-4"
+                whileHover={{ scale: 1.2, rotateZ: 10 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                {item.icon}
+              </motion.div>
+              <h4 className="text-lg font-bold text-purple-200 mb-2">{item.title}</h4>
+              <p className="text-sm text-purple-100">{item.description}</p>
             </motion.div>
           ))}
-        </div>
-
-        <h3 className="text-2xl font-semibold text-purple-200 mt-12 mb-4">🔗 Connect With Me</h3>
-        <div className="flex flex-wrap gap-6 text-lg justify-center mb-12">
-          <Link href="https://github.com/iqraazam" target="_blank" className="hover:text-pink-400 flex items-center gap-2">
-            <FaGithub /> GitHub
-          </Link>
-          <Link
-            href="https://www.linkedin.com/in/iqraa-aazam/"
-            target="_blank"
-            className="hover:text-pink-400 flex items-center gap-2"
-          >
-            <FaLinkedin /> LinkedIn
-          </Link>
-          <Link
-            href="https://instagram.com/"
-            target="_blank"
-            className="hover:text-pink-400 flex items-center gap-2"
-          >
-            <FaInstagram /> Instagram
-          </Link>
-        </div>
-
-        <div className="text-center mt-10">
-          <Link
-            href="/contact"
-            className="px-6 py-3 rounded-xl bg-purple-700/30 border border-purple-500 text-white hover:bg-purple-700/50 transition backdrop-blur"
-          >
-            ✉️ Let’s Work Together
-          </Link>
         </div>
       </motion.div>
     </section>

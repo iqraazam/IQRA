@@ -12,6 +12,8 @@ export default function Header() {
   const linkRefs = {
     '/': useRef<HTMLAnchorElement>(null),
     '/about': useRef<HTMLAnchorElement>(null),
+    '/experience': useRef<HTMLAnchorElement>(null),
+    '/achievements': useRef<HTMLAnchorElement>(null),
     '/projects': useRef<HTMLAnchorElement>(null),
     '/contact': useRef<HTMLAnchorElement>(null),
   }
@@ -55,6 +57,24 @@ export default function Header() {
             About
           </Link>
           <Link
+            ref={linkRefs['/experience']}
+            href="/experience"
+            className={`relative transition-colors ${
+              pathname === '/experience' ? 'text-pink-500 font-semibold' : ''
+            }`}
+          >
+            Experience
+          </Link>
+          <Link
+            ref={linkRefs['/achievements']}
+            href="/achievements"
+            className={`relative transition-colors ${
+              pathname === '/achievements' ? 'text-pink-500 font-semibold' : ''
+            }`}
+          >
+            Achievements
+          </Link>
+          <Link
             ref={linkRefs['/projects']}
             href="/projects"
             className={`relative transition-colors ${
@@ -91,6 +111,8 @@ export default function Header() {
         <div className="md:hidden mt-2 space-y-2">
           <Link href="/" className="block">Home</Link>
           <Link href="/about" className="block">About</Link>
+          <Link href="/experience" className="block">Experience</Link>
+          <Link href="/achievements" className="block">Achievements</Link>
           <Link href="/projects" className="block">Projects</Link>
           <Link href="/contact" className="block">Contact</Link>
         </div>
