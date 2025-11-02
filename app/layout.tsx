@@ -11,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-black text-white">
+      <body className="bg-gradient-to-br from-black via-purple-950 to-black text-white">
         <Header />
         <main className="pt-20 min-h-screen">{children}</main>
         <Footer />

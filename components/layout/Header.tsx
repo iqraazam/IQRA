@@ -31,7 +31,7 @@ export default function Header() {
   }, [pathname])
 
   return (
-    <header className="fixed top-0 w-full bg-purple-900/30 backdrop-blur-lg border-b border-purple-500/20 text-white z-50 px-6 py-4 shadow-md">
+    <header className="fixed top-0 w-full bg-transparent border-b border-transparent text-white z-50 px-6 py-4">
       <div className="max-w-7xl mx-auto flex justify-between items-center relative">
         {/* Brand Name */}
         <Link href="/" className="text-xl font-bold whitespace-nowrap">IqraDev</Link>

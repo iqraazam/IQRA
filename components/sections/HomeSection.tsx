@@ -9,56 +9,122 @@ export default function HomeSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
+  const canvas = canvasRef.current
+  if (!canvas) return
+  const ctx = canvas.getContext('2d')
+  if (!ctx) return
+  // narrow types for inner functions
+  const canvasEl = canvas as HTMLCanvasElement
+  const ctx2 = ctx as CanvasRenderingContext2D
 
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+    // Use devicePixelRatio for crisp rendering on high-DPI displays
+    const dpr = Math.max(window.devicePixelRatio || 1, 1)
+    let animationId: number | null = null
+    let running = true
 
-    const particles: Array<{
-      x: number
-      y: number
-      size: number
-      speedX: number
-      speedY: number
-      opacity: number
-    }> = []
-    for (let i = 0; i < 100; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2,
-        speedX: (Math.random() - 0.5) * 0.5,
-        speedY: (Math.random() - 0.5) * 0.5,
-        opacity: Math.random()
-      })
+    function resizeCanvas() {
+      const w = window.innerWidth
+      const h = window.innerHeight
+      canvasEl.style.width = `${w}px`
+      canvasEl.style.height = `${h}px`
+      canvasEl.width = Math.floor(w * dpr)
+      canvasEl.height = Math.floor(h * dpr)
+      ctx2.setTransform(dpr, 0, 0, dpr, 0, 0)
     }
 
+    // Create particles adaptively based on viewport area
+    type Particle = { x: number; y: number; size: number; speedX: number; speedY: number; opacity: number }
+    let particles: Particle[] = []
+    function createParticles() {
+      particles = []
+      const area = window.innerWidth * window.innerHeight
+      // base count scaled by viewport; clamp to reasonable bounds
+      const base = (area / (1366 * 768)) * 60
+      const count = Math.max(30, Math.min(120, Math.floor(base)))
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * window.innerWidth,
+          y: Math.random() * window.innerHeight,
+          size: Math.random() * (dpr > 1 ? 1.8 : 1.6),
+          speedX: (Math.random() - 0.5) * (0.6 + Math.random() * 0.6),
+          speedY: (Math.random() - 0.5) * (0.6 + Math.random() * 0.6),
+          opacity: 0.2 + Math.random() * 0.8,
+        })
+      }
+    }
+
+    resizeCanvas()
+    createParticles()
+
+    // Skip frames to reduce CPU on lower-end devices (renders ~30fps)
+    let frame = 0
     function animate() {
-      if (!ctx || !canvas) return
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      particles.forEach((p) => {
+      if (!running) return
+      animationId = requestAnimationFrame(animate)
+      frame++
+      if (frame % 2 !== 0) return // simple frame-skip
+
+      ctx2.clearRect(0, 0, canvasEl.width, canvasEl.height)
+      const w = window.innerWidth
+      const h = window.innerHeight
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i]
         p.x += p.speedX
         p.y += p.speedY
-        if (p.x < 0 || p.x > canvas.width) p.speedX *= -1
-        if (p.y < 0 || p.y > canvas.height) p.speedY *= -1
-        ctx.fillStyle = `rgba(168, 85, 247, ${p.opacity})`
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
-        ctx.fill()
-      })
-      requestAnimationFrame(animate)
-    }
-    animate()
+        if (p.x < -10) p.x = w + 10
+        if (p.x > w + 10) p.x = -10
+        if (p.y < -10) p.y = h + 10
+        if (p.y > h + 10) p.y = -10
 
+        ctx2.fillStyle = `rgba(168, 85, 247, ${p.opacity})`
+        ctx2.beginPath()
+        ctx2.arc(p.x, p.y, p.size, 0, Math.PI * 2)
+        ctx2.fill()
+      }
+    }
+
+    // Pause animation when canvas is not visible to save CPU
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!running) {
+              running = true
+              frame = 0
+              animate()
+            }
+          } else {
+            running = false
+            if (animationId) cancelAnimationFrame(animationId)
+            animationId = null
+          }
+        })
+      },
+      { threshold: 0.01 }
+    )
+    observer.observe(canvas)
+
+    // handle resize with debounce
+    let resizeTimer: any = null
     const handleResize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+      clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(() => {
+        resizeCanvas()
+        createParticles()
+      }, 120)
     }
     window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+
+    // Start animation
+    animate()
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+      observer.disconnect()
+      running = false
+      if (animationId) cancelAnimationFrame(animationId)
+      clearTimeout(resizeTimer)
+    }
   }, [])
 
   return (

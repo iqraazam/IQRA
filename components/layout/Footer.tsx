@@ -5,7 +5,7 @@ import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa'
 
 export default function Footer() {
   return (
-    <footer className="w-full mt-20 py-8 px-4 bg-gradient-to-r from-purple-900/30 to-black/30 backdrop-blur-md border-t border-purple-500/20 text-white">
+    <footer className="w-full mt-20 py-8 px-4 bg-transparent border-t border-transparent text-white">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Social Links */}
