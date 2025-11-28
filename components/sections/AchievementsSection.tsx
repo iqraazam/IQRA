@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { FaCertificate, FaTrophy, FaFilePdf, FaExternalLinkAlt } from 'react-icons/fa'
+import SilverCard from '@/components/common/SilverCard'
 
 const certifications = [
   {
@@ -75,10 +76,10 @@ const researchPapers = [
 
 export default function AchievementsSection() {
   return (
-    <section className="py-28 px-6 bg-gradient-to-br from-black via-purple-950 to-black text-white min-h-screen">
+    <section id="achievements" className="py-28 px-6 text-white min-h-screen">
       <div className="max-w-7xl mx-auto">
         <motion.h1
-          className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-6 text-center"
+          className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 mb-6 text-center"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -87,7 +88,7 @@ export default function AchievementsSection() {
         </motion.h1>
 
         <motion.p
-          className="text-center text-purple-100 mb-16 max-w-3xl mx-auto text-lg"
+          className="text-center text-gray-200 mb-16 max-w-3xl mx-auto text-lg"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.8 }}
@@ -98,31 +99,31 @@ export default function AchievementsSection() {
         {/* Certifications Section */}
         <div className="mb-20">
           <div className="flex items-center gap-3 mb-8">
-            <FaCertificate className="text-4xl text-pink-400" />
-            <h2 className="text-3xl font-bold text-purple-300">Professional Certifications</h2>
+            <FaCertificate className="text-4xl text-gray-400" />
+            <h2 className="text-3xl font-bold text-gray-300">Professional Certifications</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {certifications.map((cert, index) => (
-              <motion.div
-                key={index}
-                className="glass-card p-6"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-                whileHover={{ scale: 1.03, y: -5 }}
-              >
+              <SilverCard key={index} delay={index * 100}>
+                <motion.div
+                  className="glass-card p-6"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.6 }}
+                  whileHover={{ scale: 1.03, y: -5 }}
+                >
                 <div className="text-5xl mb-4">{cert.icon}</div>
-                <h3 className="text-xl font-bold text-purple-200 mb-2">{cert.title}</h3>
-                <p className="text-sm text-pink-400 mb-3 font-semibold">{cert.provider}</p>
-                <p className="text-sm text-purple-100 mb-4 leading-relaxed">{cert.description}</p>
+                <h3 className="text-xl font-bold text-gray-300 mb-2">{cert.title}</h3>
+                <p className="text-sm text-gray-400 mb-3 font-semibold">{cert.provider}</p>
+                <p className="text-sm text-gray-200 mb-4 leading-relaxed">{cert.description}</p>
                 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {cert.skills.map((skill, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 bg-purple-700/40 text-xs rounded-full text-purple-100 border border-purple-400/30"
+                      className="px-3 py-1 bg-gray-700/40 text-xs rounded-full text-gray-200 border border-gray-500/30"
                     >
                       {skill}
                     </span>
@@ -132,11 +133,12 @@ export default function AchievementsSection() {
                 <Link
                   href={cert.link}
                   target="_blank"
-                  className="inline-flex items-center gap-2 text-pink-400 hover:text-pink-300 transition-colors text-sm font-semibold"
+                  className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm font-semibold"
                 >
                   View Certificate <FaExternalLinkAlt className="text-xs" />
                 </Link>
-              </motion.div>
+                </motion.div>
+              </SilverCard>
             ))}
           </div>
         </div>
@@ -144,34 +146,35 @@ export default function AchievementsSection() {
         {/* Achievements Section */}
         <div className="mb-20">
           <div className="flex items-center gap-3 mb-8">
-            <FaTrophy className="text-4xl text-pink-400" />
-            <h2 className="text-3xl font-bold text-purple-300">Key Achievements</h2>
+            <FaTrophy className="text-4xl text-gray-400" />
+            <h2 className="text-3xl font-bold text-gray-300">Key Achievements</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {achievements.map((achievement, index) => (
-              <motion.div
-                key={index}
-                className="glass-card p-6"
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-                whileHover={{ scale: 1.02 }}
-              >
+              <SilverCard key={index} delay={index * 120}>
+                <motion.div
+                  className="glass-card p-6"
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.6 }}
+                  whileHover={{ scale: 1.02 }}
+                >
                 <div className="flex items-start gap-4">
                   <div className="text-4xl">{achievement.icon}</div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
-                      <h3 className="text-lg font-bold text-purple-200">{achievement.title}</h3>
-                      <span className="px-2 py-1 bg-pink-500/20 text-xs rounded-full text-pink-300 border border-pink-400/30">
+                      <h3 className="text-lg font-bold text-gray-300">{achievement.title}</h3>
+                      <span className="px-2 py-1 bg-gray-500/20 text-xs rounded-full text-gray-400 border border-gray-500/30">
                         {achievement.category}
                       </span>
                     </div>
-                    <p className="text-sm text-purple-100 leading-relaxed">{achievement.description}</p>
+                    <p className="text-sm text-gray-200 leading-relaxed">{achievement.description}</p>
                   </div>
                 </div>
-              </motion.div>
+                </motion.div>
+              </SilverCard>
             ))}
           </div>
         </div>
@@ -179,26 +182,26 @@ export default function AchievementsSection() {
         {/* Research Papers Section */}
         <div>
           <div className="flex items-center gap-3 mb-8">
-            <FaFilePdf className="text-4xl text-pink-400" />
-            <h2 className="text-3xl font-bold text-purple-300">Research Publications</h2>
+            <FaFilePdf className="text-4xl text-gray-400" />
+            <h2 className="text-3xl font-bold text-gray-300">Research Publications</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {researchPapers.map((paper, index) => (
-              <motion.div
-                key={index}
-                className="glass-card p-6"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.6 }}
-                whileHover={{ scale: 1.03 }}
-              >
+              <SilverCard key={index} delay={index * 150}>
+                <motion.div
+                  className="glass-card p-6"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.6 }}
+                  whileHover={{ scale: 1.03 }}
+                >
                 <div className="flex items-start gap-4">
-                  <div className="text-5xl text-pink-400">{paper.icon}</div>
+                  <div className="text-5xl text-gray-400">{paper.icon}</div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold text-purple-200 mb-2">{paper.title}</h3>
-                    <p className="text-sm text-purple-100 mb-4 leading-relaxed">{paper.description}</p>
+                    <h3 className="text-xl font-bold text-gray-300 mb-2">{paper.title}</h3>
+                    <p className="text-sm text-gray-200 mb-4 leading-relaxed">{paper.description}</p>
                     <a
                       href={paper.file}
                       download
@@ -208,7 +211,8 @@ export default function AchievementsSection() {
                     </a>
                   </div>
                 </div>
-              </motion.div>
+                </motion.div>
+              </SilverCard>
             ))}
           </div>
         </div>

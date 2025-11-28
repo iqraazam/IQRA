@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import SilverCard from '@/components/common/SilverCard'
 
 const experiences = [
   {
@@ -35,10 +36,10 @@ const experiences = [
 
 export default function ExperienceSection() {
   return (
-    <section className="py-28 px-6 bg-gradient-to-br from-black via-purple-950 to-black text-white min-h-screen">
+    <section id="experience" className="py-28 px-6 text-white min-h-screen">
       <div className="max-w-6xl mx-auto">
         <motion.h2
-          className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-16 text-center"
+          className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 mb-16 text-center"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -48,7 +49,7 @@ export default function ExperienceSection() {
 
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-500 via-pink-500 to-purple-500"></div>
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-gray-500 via-gray-400 to-gray-500"></div>
 
           {experiences.map((exp, index) => (
             <motion.div
@@ -62,25 +63,26 @@ export default function ExperienceSection() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
               {/* Timeline dot */}
-              <div className="absolute left-8 md:left-1/2 w-4 h-4 bg-pink-500 rounded-full border-4 border-black transform -translate-x-1/2 shadow-lg shadow-pink-500/50"></div>
+              <div className="absolute left-8 md:left-1/2 w-4 h-4 bg-gray-400 rounded-full border-4 border-black transform -translate-x-1/2 shadow-lg shadow-gray-400/50"></div>
 
               {/* Content card */}
               <div className={`ml-20 md:ml-0 w-full md:w-5/12 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}>
-                <motion.div
-                  className="glass-card p-6 rounded-2xl"
-                  whileHover={{ scale: 1.02, y: -5 }}
-                >
+                <SilverCard delay={index * 150}>
+                  <motion.div
+                    className="glass-card p-6 rounded-2xl"
+                    whileHover={{ scale: 1.02, y: -5 }}
+                  >
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-2xl font-bold text-purple-200">{exp.company}</h3>
+                    <h3 className="text-2xl font-bold text-gray-300">{exp.company}</h3>
                   </div>
                   
-                  <h4 className="text-lg text-pink-400 font-semibold mb-1">{exp.role}</h4>
+                  <h4 className="text-lg text-gray-400 font-semibold mb-1">{exp.role}</h4>
                   
-                  <p className="text-sm text-purple-300 mb-4 flex items-center gap-2">
+                  <p className="text-sm text-gray-300 mb-4 flex items-center gap-2">
                     <span>📅</span> {exp.period}
                   </p>
                   
-                  <p className="text-purple-100 text-sm leading-relaxed mb-4">
+                  <p className="text-gray-200 text-sm leading-relaxed mb-4">
                     {exp.description}
                   </p>
                   
@@ -88,13 +90,14 @@ export default function ExperienceSection() {
                     {exp.highlights.map((highlight, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1 bg-purple-700/40 text-xs rounded-full text-purple-100 border border-purple-400/30"
+                        className="px-3 py-1 bg-gray-700/40 text-xs rounded-full text-gray-200 border border-gray-500/30"
                       >
                         {highlight}
                       </span>
                     ))}
                   </div>
-                </motion.div>
+                  </motion.div>
+                </SilverCard>
               </div>
             </motion.div>
           ))}

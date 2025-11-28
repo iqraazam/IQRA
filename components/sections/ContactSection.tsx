@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa'
 import Link from 'next/link'
+import SilverCard from '@/components/common/SilverCard'
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
@@ -44,11 +45,11 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative min-h-screen flex flex-col items-center justify-center px-6 py-28 bg-gradient-to-br from-black via-purple-950 to-black text-white overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center px-6 py-28 text-white overflow-hidden"
     >
       {/* Floating background orbs */}
       <motion.div 
-        className="absolute top-20 left-1/4 w-64 h-64 rounded-full bg-purple-500/20 blur-3xl"
+        className="absolute top-20 left-1/4 w-64 h-64 rounded-full bg-gray-600/20 blur-3xl"
         animate={{ 
           y: [0, 40, 0],
           scale: [1, 1.15, 1]
@@ -56,7 +57,7 @@ export default function ContactSection() {
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div 
-        className="absolute bottom-20 right-1/4 w-72 h-72 rounded-full bg-pink-500/20 blur-3xl"
+        className="absolute bottom-20 right-1/4 w-72 h-72 rounded-full bg-gray-400/20 blur-3xl"
         animate={{ 
           y: [0, -40, 0],
           scale: [1.15, 1, 1.15]
@@ -64,56 +65,57 @@ export default function ContactSection() {
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
       
-      <motion.div
-        className="max-w-3xl w-full glass-card-3d p-12 rounded-2xl relative z-10"
-        initial={{ opacity: 0, y: 30, rotateX: 10 }}
-        animate={{ opacity: 1, y: 0, rotateX: 0 }}
-        transition={{ duration: 1 }}
-        whileHover={{ scale: 1.01 }}
-        style={{ transformStyle: 'preserve-3d' }}
-      >
-        <h2 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-8 text-center">
+      <SilverCard className="max-w-3xl w-full relative z-10">
+        <motion.div
+          className="glass-card-3d p-12 rounded-2xl"
+          initial={{ opacity: 0, y: 30, rotateX: 10 }}
+          animate={{ opacity: 1, y: 0, rotateX: 0 }}
+          transition={{ duration: 1 }}
+          whileHover={{ scale: 1.01 }}
+          style={{ transformStyle: 'preserve-3d' }}
+        >
+        <h2 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 mb-8 text-center">
           📬 Get In Touch
         </h2>
 
-        <p className="text-center text-purple-100 mb-10 text-lg">
+        <p className="text-center text-gray-200 mb-10 text-lg">
           Have a project in mind or want to collaborate? I'd love to hear from you!
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm mb-2 text-purple-200 font-medium">Name</label>
+            <label className="block text-sm mb-2 text-gray-300 font-medium">Name</label>
             <input
               type="text"
               required
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="Your Name"
-              className="w-full px-4 py-3 rounded-xl bg-purple-800/20 border border-purple-500/30 text-white placeholder-purple-300/50 focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
+              className="w-full px-4 py-3 rounded-xl bg-gray-800/20 border border-gray-500/30 text-white placeholder-gray-400/50 focus:outline-none focus:ring-2 focus:ring-gray-500 transition"
             />
           </div>
 
           <div>
-            <label className="block text-sm mb-2 text-purple-200 font-medium">Email</label>
+            <label className="block text-sm mb-2 text-gray-300 font-medium">Email</label>
             <input
               type="email"
               required
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="you@example.com"
-              className="w-full px-4 py-3 rounded-xl bg-purple-800/20 border border-purple-500/30 text-white placeholder-purple-300/50 focus:outline-none focus:ring-2 focus:ring-purple-500 transition"
+              className="w-full px-4 py-3 rounded-xl bg-gray-800/20 border border-gray-500/30 text-white placeholder-gray-400/50 focus:outline-none focus:ring-2 focus:ring-gray-500 transition"
             />
           </div>
 
           <div>
-            <label className="block text-sm mb-2 text-purple-200 font-medium">Message</label>
+            <label className="block text-sm mb-2 text-gray-300 font-medium">Message</label>
             <textarea
               rows={6}
               required
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               placeholder="Tell me about your project or idea..."
-              className="w-full px-4 py-3 rounded-xl bg-purple-800/20 border border-purple-500/30 text-white placeholder-purple-300/50 focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none transition"
+              className="w-full px-4 py-3 rounded-xl bg-gray-800/20 border border-gray-500/30 text-white placeholder-gray-400/50 focus:outline-none focus:ring-2 focus:ring-gray-500 resize-none transition"
             />
           </div>
 
@@ -130,10 +132,10 @@ export default function ContactSection() {
           </div>
         </form>
 
-        <div className="mt-12 text-center text-sm text-purple-300">
+        <div className="mt-12 text-center text-sm text-gray-300">
           Or email me directly at:
           <br />
-          <a href="mailto:azamiqra178@gmail.com" className="text-pink-400 hover:underline text-lg font-semibold">
+          <a href="mailto:azamiqra178@gmail.com" className="text-gray-400 hover:underline text-lg font-semibold">
             azamiqra178@gmail.com
           </a>
         </div>
@@ -155,7 +157,8 @@ export default function ContactSection() {
             </Link>
           </motion.div>
         </div>
-      </motion.div>
+        </motion.div>
+      </SilverCard>
     </section>
   )
 }

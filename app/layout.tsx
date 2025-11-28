@@ -11,7 +11,15 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="bg-gradient-to-br from-black via-purple-950 to-black text-white">
+      <body className="bg-gradient-to-br from-black via-gray-900 to-black text-white">
+        {/* Side Grid Decorations */}
+        <div className="side-grid-left">
+          <div className="grid-scanner"></div>
+        </div>
+        <div className="side-grid-right">
+          <div className="grid-scanner"></div>
+        </div>
+        
         <Header />
         <main className="pt-20 min-h-screen">{children}</main>
         <Footer />

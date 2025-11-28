@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import SilverCard from '@/components/common/SilverCard'
 
 const projects = [
   {
@@ -36,10 +37,10 @@ const projects = [
 
 export default function ProjectsSection() {
   return (
-    <section id="projects" className="relative py-28 px-6 bg-gradient-to-br from-black via-purple-950 to-black text-white min-h-screen overflow-hidden">
+    <section id="projects" className="relative py-28 px-6 text-white min-h-screen overflow-hidden">
       {/* Animated background elements */}
       <motion.div 
-        className="absolute top-40 right-20 w-72 h-72 rounded-full bg-pink-500/20 blur-3xl"
+        className="absolute top-40 right-20 w-72 h-72 rounded-full bg-gray-600/20 blur-3xl"
         animate={{ 
           scale: [1, 1.2, 1],
           opacity: [0.2, 0.3, 0.2]
@@ -47,7 +48,7 @@ export default function ProjectsSection() {
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div 
-        className="absolute bottom-40 left-20 w-96 h-96 rounded-full bg-purple-500/20 blur-3xl"
+        className="absolute bottom-40 left-20 w-96 h-96 rounded-full bg-gray-400/20 blur-3xl"
         animate={{ 
           scale: [1.2, 1, 1.2],
           opacity: [0.3, 0.2, 0.3]
@@ -57,7 +58,7 @@ export default function ProjectsSection() {
       
       <div className="max-w-7xl mx-auto relative z-10">
         <motion.h2
-          className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-12 text-center"
+          className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 mb-12 text-center"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -67,43 +68,43 @@ export default function ProjectsSection() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
           {projects.map((proj, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ 
-                scale: 1.03, 
-                y: -12,
-                rotateX: 2,
-                rotateY: 2
-              }}
-              className="glass-card-3d p-8 text-left group cursor-pointer"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
-              style={{ transformStyle: 'preserve-3d' }}
-            >
+            <SilverCard key={i} delay={i * 150}>
+              <motion.div
+                whileHover={{ 
+                  scale: 1.03, 
+                  y: -12,
+                  rotateX: 2,
+                  rotateY: 2
+                }}
+                className="glass-card-3d p-8 text-left group cursor-pointer"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.6 }}
+                style={{ transformStyle: 'preserve-3d' }}
+              >
               <div className="flex items-center justify-between mb-4">
                 <motion.h3 
-                  className="text-2xl font-bold text-purple-200 group-hover:text-pink-300 transition-colors"
+                  className="text-2xl font-bold text-gray-300 group-hover:text-white transition-colors"
                   whileHover={{ x: 5 }}
                 >
                   {proj.title}
                 </motion.h3>
                 <motion.span 
-                  className="px-3 py-1 bg-purple-600/40 text-xs rounded-full text-purple-100 border border-purple-400/30"
+                  className="px-3 py-1 bg-gray-700/40 text-xs rounded-full text-gray-200 border border-gray-500/30"
                   whileHover={{ scale: 1.1, rotate: 5 }}
                 >
                   {proj.category}
                 </motion.span>
               </div>
               
-              <p className="text-sm text-purple-100 mb-6 leading-relaxed">{proj.description}</p>
+              <p className="text-sm text-gray-200 mb-6 leading-relaxed">{proj.description}</p>
               
               <div className="flex flex-wrap gap-2 mb-6">
                 {proj.tech.map((tech, j) => (
                   <motion.span
                     key={j}
-                    className="px-3 py-1 bg-purple-800/40 text-xs rounded-full text-purple-100 border border-purple-400/20"
+                    className="px-3 py-1 bg-gray-800/40 text-xs rounded-full text-gray-200 border border-gray-600/20"
                     whileHover={{ scale: 1.1, y: -2 }}
                     transition={{ type: "spring", stiffness: 400 }}
                   >
@@ -115,7 +116,7 @@ export default function ProjectsSection() {
               <Link
                 href={proj.github}
                 target="_blank"
-                className="inline-flex items-center gap-2 text-pink-400 hover:text-pink-300 transition-colors text-sm font-semibold group/link"
+                className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm font-semibold group/link"
               >
                 <motion.svg 
                   className="w-5 h-5" 
@@ -128,7 +129,8 @@ export default function ProjectsSection() {
                 </motion.svg>
                 <span className="group-hover/link:translate-x-1 transition-transform inline-block">View on GitHub →</span>
               </Link>
-            </motion.div>
+              </motion.div>
+            </SilverCard>
           ))}
         </div>
       </div>
