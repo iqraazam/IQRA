@@ -375,7 +375,7 @@ export default function HomeSection() {
               <span className="text-gray-400 text-xl">🔗</span>
               <h3 className="text-gray-300 font-semibold">Connect</h3>
             </div>
-            <div className="flex gap-4 text-2xl">
+            <div className="flex gap-4 text-2xl mb-3">
               <motion.a
                 href="https://github.com/iqraazam"
                 target="_blank"
@@ -395,6 +395,15 @@ export default function HomeSection() {
                 <FaLinkedin />
               </motion.a>
             </div>
+            <button 
+              onClick={() => {
+                navigator.clipboard.writeText('azamiqra178@gmail.com');
+                alert('Email copied to clipboard!');
+              }}
+              className="text-xs text-gray-400 hover:text-white transition-colors break-all cursor-pointer"
+            >
+              azamiqra178@gmail.com
+            </button>
             </motion.div>
           </SilverCard>
         </motion.div>

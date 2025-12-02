@@ -6,6 +6,9 @@ import Footer from '@/components/layout/Footer'
 export const metadata = {
   title: 'Iqra Dev Portfolio',
   description: 'Full-stack + AI Developer Portfolio',
+  icons: {
+    icon: '/icon.svg',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
