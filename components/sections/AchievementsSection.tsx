@@ -29,6 +29,14 @@ const certifications = [
     link: 'https://learn.microsoft.com/en-us/users/iqraazam-5544/achievements/xmtszgry?ref=https%3A%2F%2Fwww.linkedin.com%2F',
     icon: '💾',
     skills: ['Azure Cloud', 'Data Storage', 'Analytics', 'Cloud Computing']
+  },
+  {
+    title: 'Digital Badge',
+    provider: 'Credly',
+    description: 'Verified digital credential badge demonstrating professional achievements and competencies.',
+    link: 'https://www.credly.com/go/XSxbTR74',
+    icon: '🏅',
+    skills: ['Professional Credential', 'Digital Badge', 'Verification', 'Achievement']
   }
 ]
 

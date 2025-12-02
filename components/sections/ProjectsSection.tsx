@@ -9,29 +9,33 @@ const projects = [
     title: 'DermaDiagnostics',
     description: 'AI-powered skin disease classification system using CNNs and advanced image preprocessing achieving 92% accuracy.',
     tech: ['Python', 'TensorFlow', 'Deep Learning', 'Computer Vision'],
-    github: 'https://github.com/iqraazam',
+    link: 'https://github.com/afeefjunaid/fyp.git',
+    linkType: 'github',
     category: 'AI'
   },
   {
     title: 'Stylique - AI Fashion Advisor',
     description: 'Modern styling web app offering personalized outfit suggestions using real-time AI and machine learning models.',
     tech: ['Next.js', 'Node.js', 'Supabase', 'AI/ML'],
-    github: 'https://github.com/iqraazam',
+    link: 'https://stylique-project-code.vercel.app',
+    linkType: 'vercel',
     category: 'AI'
   },
   {
-    title: 'Face Spoof Detection System',
-    description: 'Security model using Vision Transformers and Contrastive Pretraining to prevent facial recognition spoof attacks.',
-    tech: ['Python', 'ViT', 'Transformers', 'PyTorch'],
-    github: 'https://github.com/iqraazam',
+    title: 'Model Forge',
+    description: 'Advanced ML model training and deployment platform with automated pipeline management and version control.',
+    tech: ['Python', 'ML Pipeline', 'Docker', 'FastAPI'],
+    link: 'https://model-forge-tau.vercel.app/',
+    linkType: 'vercel',
     category: 'AI'
   },
   {
-    title: 'Social Media Platform',
-    description: 'Full-featured social app with real-time messaging, news feeds, profiles, and scalable backend architecture.',
-    tech: ['MongoDB', 'Express', 'React', 'Node.js'],
-    github: 'https://github.com/iqraazam',
-    category: 'Flutter'
+    title: 'Machine Learning Operations',
+    description: 'Student grading MLOps system with automated model training, evaluation, and deployment pipelines.',
+    tech: ['Python', 'MLOps', 'CI/CD', 'Docker'],
+    link: 'https://github.com/iqraazam/student_grading_mlops.git',
+    linkType: 'github',
+    category: 'MLOps'
   }
 ]
 
@@ -114,20 +118,37 @@ export default function ProjectsSection() {
               </div>
               
               <Link
-                href={proj.github}
+                href={proj.link}
                 target="_blank"
                 className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm font-semibold group/link"
               >
-                <motion.svg 
-                  className="w-5 h-5" 
-                  fill="currentColor" 
-                  viewBox="0 0 24 24"
-                  whileHover={{ rotate: 360, scale: 1.2 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                </motion.svg>
-                <span className="group-hover/link:translate-x-1 transition-transform inline-block">View on GitHub →</span>
+                {proj.linkType === 'github' ? (
+                  <>
+                    <motion.svg 
+                      className="w-5 h-5" 
+                      fill="currentColor" 
+                      viewBox="0 0 24 24"
+                      whileHover={{ rotate: 360, scale: 1.2 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </motion.svg>
+                    <span className="group-hover/link:translate-x-1 transition-transform inline-block">View on GitHub →</span>
+                  </>
+                ) : (
+                  <>
+                    <motion.svg 
+                      className="w-5 h-5" 
+                      fill="currentColor" 
+                      viewBox="0 0 24 24"
+                      whileHover={{ scale: 1.2 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </motion.svg>
+                    <span className="group-hover/link:translate-x-1 transition-transform inline-block">View Live Demo →</span>
+                  </>
+                )}
               </Link>
               </motion.div>
             </SilverCard>
